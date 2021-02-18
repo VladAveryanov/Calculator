@@ -4,31 +4,6 @@ using System.Text;
 
 namespace IpadCalculator
 {
-    class Calculate
-    {
-		
-		public static int Compute(string str)
-		{
-			var operations = new Dictionary<char, Func<int, int, int>>();
-			operations.Add('+', (y, x) => x + y);
-			operations.Add('-', (y, x) => x - y);
-			operations.Add('*', (y, x) => x * y);
-			operations.Add('/', (y, x) => x / y);
-
-			var stack = new Stack<int>();
-			foreach (var e in str)
-			{
-				if (e <= '9' && e >= '0')
-					stack.Push(e);
-				else if (operations.ContainsKey(e))
-					stack.Push(operations[e](stack.Pop(), stack.Pop()));
-				else
-					throw new ArgumentException();
-			}
-			return stack.Pop();
-		}
-	}
-
     public class PostfixNotationExpression
     {
         public PostfixNotationExpression()

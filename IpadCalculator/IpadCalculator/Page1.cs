@@ -7,20 +7,14 @@ namespace IpadCalculator
 {
     public class FirstPage : ContentPage
     {
-        
         Label outputLabel;
-
 
         public FirstPage()
         {
-            
-
             Grid grid = new Grid
             {
                 BackgroundColor = Color.Black,
                 VerticalOptions = LayoutOptions.FillAndExpand,
-
-                
                 RowDefinitions =
                 {
                     new RowDefinition(),
@@ -29,8 +23,6 @@ namespace IpadCalculator
                     new RowDefinition(),
                     new RowDefinition(),
                     new RowDefinition(),
-                    
-
                 },
                 ColumnDefinitions =
                 {
@@ -39,30 +31,15 @@ namespace IpadCalculator
                     new ColumnDefinition(),
                     new ColumnDefinition(),
                 },
-                
-
             };
 
             outputLabel = new Label
             {
-                
                 TextColor = Color.White,
                 BackgroundColor = Color.Black
-                
             };
             outputLabel.FontSize = 20;
             grid.Children.Add(outputLabel, 0, 4, 0, 2);
-
-
-            //var buttonLol = new Button
-            //{
-            //    Text = "Тест",
-            //    TextColor = Color.White,
-
-            //    BackgroundColor = Color.DarkGray
-            //};
-            //buttonLol.Clicked += ButtonLol_Clicked;
-            //grid.Children.Add(buttonLol, 0, 4, 0, 2);
 
 
             var buttonAllClear = new Button
@@ -70,62 +47,32 @@ namespace IpadCalculator
                 Text = "AC",
                 TextColor = Color.White,
                 FontSize = 25,
-
                 BackgroundColor = Color.DarkGray
             };
             buttonAllClear.Clicked += ButtonAllClear_Clicked;
             grid.Children.Add(buttonAllClear, 0, 2);
+
 
             var buttonClear = new Button
             {
                 Text = "C",
                 TextColor = Color.White,
                 FontSize = 25,
-
                 BackgroundColor = Color.DarkGray
             };
             buttonClear.Clicked += ButtonClear_Clicked;
             grid.Children.Add(buttonClear, 1, 2);
+
 
             var buttonDigitPower = new Button
             {
                 Text = "^",
                 TextColor = Color.White,
                 FontSize = 25,
-
                 BackgroundColor = Color.DarkGray
             };
             buttonDigitPower.Clicked += ButtonEvent_Clicked;
             grid.Children.Add(buttonDigitPower, 2, 2);
-
-            //var buttondigitpower3 = new button
-            //{
-            //    text = "^",
-            //    textcolor = color.white,
-
-            //    backgroundcolor = color.darkgray
-            //};
-            //grid.children.add(buttondigitpower3, 0, 3);
-
-            //var buttondigitpower4 = new button
-            //{
-            //    text = "^",
-            //    textcolor = color.white,
-
-            //    backgroundcolor = color.darkgray
-            //};
-            //grid.children.add(buttondigitpower4, 1, 3);
-
-            //var buttondigitpower5 = new button
-            //{
-            //    text = "^",
-            //    textcolor = color.white,
-
-            //    backgroundcolor = color.darkgray
-            //};
-            //grid.children.add(buttondigitpower5, 2, 3);
-
-
 
 
             var buttonDigit1 = new Button
@@ -254,7 +201,6 @@ namespace IpadCalculator
                 TextColor = Color.White,
                 FontSize = 25,
                 BackgroundColor = Color.DarkGray,
-
             };
             buttonEquals.Clicked += ButtonEquals_Clicked;
             grid.Children.Add(buttonEquals, 3, 6);
@@ -266,7 +212,6 @@ namespace IpadCalculator
                 TextColor = Color.White,
                 FontSize = 25,
                 BackgroundColor = Color.DarkGray,
-
             };
             buttonMultiply.Clicked += ButtonEvent_Clicked;
             grid.Children.Add(buttonMultiply, 3, 3);
@@ -278,7 +223,6 @@ namespace IpadCalculator
                 TextColor = Color.White,
                 FontSize = 25,
                 BackgroundColor = Color.DarkGray,
-
             };
             buttonSubtract.Clicked += ButtonEvent_Clicked;
             grid.Children.Add(buttonSubtract, 3, 4);
@@ -290,7 +234,6 @@ namespace IpadCalculator
                 TextColor = Color.White,
                 FontSize = 25,
                 BackgroundColor = Color.DarkGray,
-
             };
             buttonAdd.Clicked += ButtonEvent_Clicked; 
             grid.Children.Add(buttonAdd, 3, 5);
@@ -302,12 +245,19 @@ namespace IpadCalculator
                 TextColor = Color.White,
                 FontSize = 25,
                 BackgroundColor = Color.DarkGray,
-
             };
             buttonDivison.Clicked += ButtonEvent_Clicked;
             grid.Children.Add(buttonDivison, 3, 2);
 
-
+            var buttonTrap = new Button
+            {
+                Text = "НАЖМИ",
+                TextColor = Color.Black,
+                FontSize = 25,
+                BackgroundColor = Color.Red,
+            }; 
+            buttonTrap.Clicked += ButtonLol_Clicked;
+            grid.Children.Add(buttonTrap, 2, 6);
 
 
             // Accomodate iPhone status bar.
@@ -318,7 +268,6 @@ namespace IpadCalculator
 
         }
 
-       
 
         private void ButtonClear_Clicked(object sender, EventArgs e) 
         {
@@ -332,13 +281,12 @@ namespace IpadCalculator
 
             var button = sender as Button;
 
-            if (text == null)
+            if (text == null || text.Length == 0)
             {
                 outputLabel.Text = "0" + button.Text;
             }
-            
-            else if (!Char.IsDigit(text[text.Length - 1]) && text != null)
-                {
+            else if (!char.IsDigit(text[text.Length - 1]) && text != null)
+            {
                     if (button.Text.ToCharArray()[0] == text[text.Length - 1])
                     {
                         outputLabel.Text += "";
@@ -347,12 +295,11 @@ namespace IpadCalculator
                     {
                         outputLabel.Text = outputLabel.Text.Substring(0, outputLabel.Text.Length - 1) + button.Text;
                     }
-                }
-                else
-                {
-                    outputLabel.Text += button.Text;
-                }
-            
+            }
+            else
+            {
+                outputLabel.Text += button.Text;
+            }
         }
 
         private void ButtonEquals_Clicked(object sender, EventArgs e)
@@ -365,14 +312,12 @@ namespace IpadCalculator
 
                 outputLabel.Text = calc.result(text).ToString();
             }
-           
         }
 
         private void ButtonAllClear_Clicked(object sender, EventArgs e)
         {
             outputLabel.Text = null;
         }
-
 
         private void ButtonDigit_Clicked(object sender, EventArgs e)
         {
@@ -382,13 +327,10 @@ namespace IpadCalculator
             
             var digit = button.Text;
 
-            //(!Char.IsDigit(text[text.Length - 1])
-
             if (button.Text == ".")
             {
-                if (outputLabel.Text == null || (!Char.IsDigit(text[text.Length-1]) && text[text.Length - 1] != '.') )
+                if (outputLabel.Text == null || (!char.IsDigit(text[text.Length-1]) && text[text.Length - 1] != '.'))
                     outputLabel.Text += "0" + button.Text;
-
                 else
                 {
                     bool isPointAllowed = true;
@@ -396,7 +338,6 @@ namespace IpadCalculator
                     {
                         if (text[i] == '.')
                             isPointAllowed = false;
-
                         switch (text[i])
                         {
                             case '+': isPointAllowed = true; break;
@@ -414,18 +355,11 @@ namespace IpadCalculator
             {
                 outputLabel.Text += button.Text;
             }
-
-
         }
 
         async void ButtonLol_Clicked(object sender, EventArgs e)
         {
             await DisplayAlert("Ловушка Джокера", "Твой компьютер захвачен высокоинтелектуальным вирусом", "Заплалтить выкуп");
         }
-
-        
-
-
-
     }
 }
